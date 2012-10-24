@@ -4,6 +4,9 @@ successfully() {
   $* || (echo "failed" 1>&2 && exit 1)
 }
 
+echo "Installing Oh-My-Zshell, which is just an awesome shell"
+  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
 echo "Checking for SSH key, generating one if it doesn't exist ..."
   [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
 
@@ -19,9 +22,7 @@ echo "Installing Homebrew, a good OS X package manager ..."
   successfully brew update
 
 echo "Putting Homebrew location earlier in PATH ..."
-  successfully echo "
-# recommended by brew doctor
-export PATH='/usr/local/bin:$PATH'" >> ~/.zshenv
+  successfully echo "# recommended by brew doctor export PATH='/usr/local/bin:$PATH'" >> ~/.zshenv
   successfully source ~/.zshenv
 
 echo "Installing GNU Compiler Collection and dependencies ..."
@@ -32,9 +33,9 @@ echo "Installing MySql"
   successfully brew install mysql
   unset TMPDIR
   mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-  setup User
 
 echo "Installing Postgres, a good open source relational database ..."
+  successfully brew link ossp-uuid
   successfully brew install postgres --no-python
 
 echo "Installing ack, a good way to search through files ..."
@@ -46,25 +47,15 @@ echo "Installing tmux, a good way to save project state and switch between proje
 echo "Installing reattach-to-user-namespace, for copy-paste and RubyMotion compatibility with tmux ..."
   successfully brew install reattach-to-user-namespace
 
-echo "Installing ImageMagick, good for cropping and re-sizing images ..."
-  successfully brew install imagemagick
-
-echo "Installing QT, used by Capybara Webkit for headless Javascript integration testing ..."
-  successfully brew install qt
-
 echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the default ..."
-  successfully curl -L https://get.rvm.io | bash -s -- --version 1.15.10 --ruby
+  successfully curl -L https://get.rvm.io | bash -s stable --ruby
   successfully echo "
 # RVM
-[[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
+  [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
   successfully source ~/.zshenv
 
-echo "Installing critical Ruby gems for Rails development ..."
-  successfully gem install bundler rails heroku pg foreman thin --no-rdoc --no-ri
-
 echo "Installing Whim, Wistia Vim Plugins"
-  mv ~/.vimrc ~/.vimrc.backup
-  mv ~/.gvimrc ~/.gvimrc.backup
+  mv ~/.vimrc ~/.vimrc.backup && mv ~/.gvimrc ~/.gvimrc.backup
   mkdir -p ~/.vim/autoload ~/.vim/bundle
   successfully curl https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim \
       > ~/.vim/autoload/pathogen.vim
@@ -78,5 +69,21 @@ echo "Installing Whim, Wistia Vim Plugins"
   ruby extconf.rb
   make
   rvm use default
+
+echo "Installing Wistia App and Wistiacom"
+  mkdir ~/wistia && cd wistia
+  echo "Wistia App"
+  successfully git clone git@github.com:wistia/wistia.git
+  echo "Wistiacom"
+  successfully git clone git@github.com:wistia/wistiacom.git
+
+echo "Installing Redis, a fast, in-memory object store"
+  successfully brew install redis
+
+echo "Installing Doomcrank, our Deployment Handler"
+  successfully git clone git@github.com:wistia/doomcrank.git
+
+echo "Updating Rubygems"
+  successfully gem update
 
 
