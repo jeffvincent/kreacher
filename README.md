@@ -12,37 +12,44 @@ First Steps
 
 2) While that is installing, [download iTerm2](http://iterm2.com).
 
-3) Open iTerm2, and Set zsh as your login shell. (After running command, close and re-open iTerm2)
-        
-        chsh -s /bin/zsh
+3) Because it takes [FOREVER](http://www.youtube.com/watch?v=H-Q7b-vHY3Q) to download Xcode, you might as well also [create a GitHub account](https://github.com/). 
+(We will be installing Git during Typhon's reign)
 
-Install
--------
+4) Open iTerm2, and Set zsh as your login shell. (After running command, close and re-open iTerm2)
+        
+    chsh -s /bin/zsh
+
+To Unleash Typhon
+-----------------
 
 Run the script:
 
     zsh < <(curl -s https://raw.github.com/jeffvincent/typhon/master/build)
 
-What it sets up
----------------
+What Typhon forces the workers to build
+---------------------------------------
 
 * Ack for finding things in files
 * Bundler gem for managing Ruby libraries
 * Foreman gem for serving Rails apps locally
-* Heroku gem for interacting with the Heroku API
-* Heroku Config plugin for local `ENV` variables
 * Homebrew for managing operating system libraries
-* ImageMagick for cropping and resizing images
 * Postgres for storing relational data
 * Postgres gem for talking to Postgres from Ruby
-* Qt for headless JavaScript testing via Capybara Webkit
+* MySQL, for...MySQLing
 * Rails gem for writing web applications
 * Ruby stable for writing general-purpose code
 * RVM for managing versions of the Ruby programming language
+* Git, for tracking project versions efficiently
 * SSH public key for authenticating with Github and Heroku
 * Tmux for saving project state and switching between projects
 
 It should take less than 15 minutes to install (depends on your machine).
+
+Post Install
+------------
+    
+    $ brew doctor
+
 
 Credits
 -------
