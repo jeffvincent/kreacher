@@ -11,16 +11,6 @@ echo "Putting the first blocks in place => New Apps in ~/the_pyramid"
   curl https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-65.tbz -o "MacVim_65.tbz"
   successfully tar xjf MacVim_65.tbz
 
-echo "Installing Oh-My-Zshell, which is just an awesome shell"
-  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-
-echo "Checking for SSH key, generating one if it doesn't exist ..."
-  [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
-
-echo "Copying public key to clipboard. Paste it into your Github account ..."
-  [[ -f ~/.ssh/id_rsa.pub ]] && cat ~/.ssh/id_rsa.pub | pbcopy
-  successfully open https://github.com/account/ssh
-
 echo "Fixing permissions ..."
   successfully sudo chown -R `whoami` /usr/local
 
@@ -35,6 +25,27 @@ echo "Putting Homebrew location earlier in PATH ..."
 echo "Installing GNU Compiler Collection and dependencies ..."
   successfully brew tap homebrew/dupes
   successfully brew install autoconf automake apple-gcc42
+
+echo "Scaling the great stones up to arrange Git"
+  successfully brew install git
+
+echo "Etch your name into the stones of Git"
+  echo "Enter Your Full Name for Git"
+  read name
+  git config --global user.name "$name"
+  echo "Enter your email address for Git"
+  read email
+  git config --global user.email "$email"
+
+echo "Installing Oh-My-Zshell, which is just an awesome shell"
+  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
+echo "Checking for SSH key, generating one if it doesn't exist ..."
+  [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
+
+echo "Copying public key to clipboard. Paste it into your Github account ..."
+  [[ -f ~/.ssh/id_rsa.pub ]] && cat ~/.ssh/id_rsa.pub | pbcopy
+  successfully open https://github.com/account/ssh
 
 echo "Installing MySql"
   successfully brew install mysql
