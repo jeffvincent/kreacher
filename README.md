@@ -1,29 +1,27 @@
-Laptop
+Typhon
 ======
 
-Laptop is a script to set up a Mac OS X laptop for Rails development.
+[Typhon](http://en.wikipedia.org/wiki/Typhon), is a script to set up a Mac OS X laptop for Wistia development.
 
-Requirements
+Much of what follows is based on [Laptop](https://github.com/thoughtbot/laptop), a similar installer devised by the awesome folks at [Thoughtbot](http://thoughtbot.com/).
+
+First Steps
 ------------
 
-1) Install a C compiler.
+1) Install XCode, and the Command Line Tools for Xcode [more info](http://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/)
 
-Use [OS X GCC Installer](https://github.com/kennethreitz/osx-gcc-installer/) for
-Snow Leopard (OS X 10.6).
+2) While that is installing, [download iTerm2](http://iterm2.com).
 
-Use [Command Line Tools for XCode](https://developer.apple.com/downloads/index.action)
-for Lion (OS X 10.7) or Mountain Lion (OS X 10.8).
-
-2) Set zsh as your login shell.
-
-    chsh -s /bin/zsh
+3) Open iTerm2, and Set zsh as your login shell. (After running command, close and re-open iTerm2)
+        
+        chsh -s /bin/zsh
 
 Install
 -------
 
 Run the script:
 
-    zsh < <(curl -s https://raw.github.com/thoughtbot/laptop/master/mac)
+    zsh < <(curl -s https://raw.github.com/jeffvincent/typhon/master/build)
 
 What it sets up
 ---------------
