@@ -4,6 +4,13 @@ successfully() {
   $* || (echo "failed" 1>&2 && exit 1)
 }
 
+echo "Putting the first blocks in place => New Apps in ~/the_pyramid"
+  mkdir ~/the_pyramid && cd ~/the_pyramid
+  curl http://cachefly.alfredapp.com/alfred_1.3.1_261.dmg -o "alfred_1.3.1_261.dmg"
+  successfully hdiutil attach alfred_1.3.1_261.dmg
+  curl https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-65.tbz -o "MacVim_65.tbz"
+  successfully tar xjf MacVim_65.tbz
+
 echo "Installing Oh-My-Zshell, which is just an awesome shell"
   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
