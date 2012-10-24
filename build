@@ -75,8 +75,6 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the de
 echo "Installing critical Ruby gems for Rails development ..."
   successfully gem install bundler rails heroku pg foreman thin --no-rdoc --no-ri
 
-echo "Moving into Erecting WISTIA"
-
 echo "Installing Whim, Wistia Vim Plugins"
   mv ~/.vimrc ~/.vimrc.backup && mv ~/.gvimrc ~/.gvimrc.backup
   mkdir -p ~/.vim/autoload ~/.vim/bundle
@@ -93,18 +91,8 @@ echo "Installing Whim, Wistia Vim Plugins"
   make
   rvm use default
 
-echo "Installing Wistia App and Wistiacom"
-  mkdir ~/wistia && cd wistia
-  echo "Wistia App"
-  successfully git clone git@github.com:wistia/wistia.git
-  echo "Wistiacom"
-  successfully git clone git@github.com:wistia/wistiacom.git
-
 echo "Installing Redis, a fast, in-memory object store"
   successfully brew install redis
-
-echo "Installing Doomcrank, our Deployment Handler"
-  successfully git clone git@github.com:wistia/doomcrank.git
 
 echo "Updating Rubygems"
   successfully gem update
