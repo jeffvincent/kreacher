@@ -72,6 +72,11 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the de
   [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
   successfully source ~/.zshenv
 
+echo "Installing critical Ruby gems for Rails development ..."
+  successfully gem install bundler rails heroku pg foreman thin --no-rdoc --no-ri
+
+echo "Moving into Erecting WISTIA"
+
 echo "Installing Whim, Wistia Vim Plugins"
   mv ~/.vimrc ~/.vimrc.backup && mv ~/.gvimrc ~/.gvimrc.backup
   mkdir -p ~/.vim/autoload ~/.vim/bundle
