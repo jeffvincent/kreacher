@@ -30,12 +30,10 @@ echo "Scaling the great stones up to arrange Git"
   successfully brew install git
 
 echo "Etch your name into the stones of Git"
-  echo "Enter Your Full Name for Git"
-  read name
-  git config --global user.name "$name"
-  echo "Enter your email address for Git"
-  read email
-  git config --global user.email "$email"
+  read line"?Enter Your Full Name for Git: "
+  git config --global user.name $line
+  read line"?Enter Your Email Address for Git: "
+  git config --global user.email $line
 
 echo "Installing Oh-My-Zshell, which is just an awesome shell"
   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
@@ -72,8 +70,14 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the de
   [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
   successfully source ~/.zshenv
 
+echo "Updating Rubygems"
+  successfully gem update
+
 echo "Installing critical Ruby gems for Rails development ..."
   successfully gem install bundler rails heroku pg foreman thin --no-rdoc --no-ri
+
+echo "Installing Redis, a fast, in-memory object store"
+  successfully brew install redis
 
 echo "Installing Whim, Wistia Vim Plugins"
   mv ~/.vimrc ~/.vimrc.backup && mv ~/.gvimrc ~/.gvimrc.backup
@@ -90,11 +94,4 @@ echo "Installing Whim, Wistia Vim Plugins"
   ruby extconf.rb
   make
   rvm use default
-
-echo "Installing Redis, a fast, in-memory object store"
-  successfully brew install redis
-
-echo "Updating Rubygems"
-  successfully gem update
-
 
