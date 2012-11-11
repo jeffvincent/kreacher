@@ -4,13 +4,6 @@ successfully() {
   $* || (echo "failed" 1>&2 && exit 1)
 }
 
-echo "Putting the first blocks in place => New Apps in ~/the_pyramid"
-  mkdir ~/the_pyramid && cd ~/the_pyramid
-  curl http://cachefly.alfredapp.com/alfred_1.3.1_261.dmg -o "alfred_1.3.1_261.dmg"
-  successfully hdiutil attach alfred_1.3.1_261.dmg
-  curl https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-65.tbz -o "MacVim_65.tbz"
-  successfully tar xjf MacVim_65.tbz
-
 echo "Fixing permissions ..."
   successfully sudo chown -R `whoami` /usr/local
 
@@ -21,6 +14,11 @@ echo "Installing Homebrew, a good OS X package manager ..."
 echo "Putting Homebrew location earlier in PATH ..."
   successfully echo "# recommended by brew doctor export PATH='/usr/local/bin:$PATH'" >> ~/.zshenv
   successfully source ~/.zshenv
+
+echo "Putting the first blocks in place => New Apps in ~/the_pyramid"
+  curl http://cachefly.alfredapp.com/alfred_1.3.1_261.dmg -o "alfred_1.3.1_261.dmg"
+  successfully hdiutil attach alfred_1.3.1_261.dmg
+  brew install macvim
 
 echo "Installing GNU Compiler Collection and dependencies ..."
   successfully brew tap homebrew/dupes
