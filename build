@@ -1,47 +1,103 @@
 #!/usr/bin/env zsh
 
+#
+# Let's get this computer up-and-running!
+#
+
+# We're going to need this function later...
 successfully() {
   $* || (echo "failed" 1>&2 && exit 1)
 }
 
-echo "Fixing permissions ..."
-  successfully sudo chown -R `whoami` /usr/local
+echo " "
+echo "  But when Zeus had driven the Titans from Olympus,"
+echo "  mother Earth bare her youngest child Typhoeus of the love of"
+echo "  Tartarus, by the aid of golden Aphrodite."
+echo "    —Hesiod, Theogony 820–822."
+echo " "
+echo " TYPHON "
+echo " "
 
-echo "Installing Homebrew, a good OS X package manager ..."
+#
+# Permissions Fix
+#
+successfully sudo chown -R `whoami` /usr/local
+
+#
+# Homebrew
+#
+echo "Bring out the mead! Tap the kegs! Bring me Homebrew!"
   successfully ruby <(curl -fsS https://raw.github.com/mxcl/homebrew/go)
   successfully brew update
-
-echo "Putting Homebrew location earlier in PATH ..."
   successfully echo "# recommended by brew doctor export PATH='/usr/local/bin:$PATH'" >> ~/.zshenv
   successfully source ~/.zshenv
 
-echo "Putting the first blocks in place => New Apps in ~/the_pyramid"
+#
+# Alfred & Macvim
+#
+echo " "
+if test -d /Applications/Alfred.app -o -d ~/Applications/Alfred.app
+then 
+  echo "  Found Alfred...good taste!"
+else
+  echo "  Typhon demands puny human to use Alfred for assisting productivity"
   curl http://cachefly.alfredapp.com/alfred_1.3.1_261.dmg -o "alfred_1.3.1_261.dmg"
   successfully hdiutil attach alfred_1.3.1_261.dmg
-  brew install macvim
+echo " "
 
+echo " "
+if test -d /Applications/MacVim.app -o -d ~/Applications/MacVim.app
+then 
+  echo "  Found MacVim...good...very good"
+else
+  echo "  Begin installing MacVim now!!!!"
+  brew install macvim
+echo " "
+
+#
+# GCC Issues Fixes
+#
 echo "Installing GNU Compiler Collection and dependencies ..."
   successfully brew tap homebrew/dupes
   successfully brew install autoconf automake apple-gcc42
 
-echo "Scaling the great stones up to arrange Git"
+#
+# Git
+#
+echo "  Even malivalent tyrants like Typhon recognize the importance of version control."
+echo "  Bring the architects! Arrange great stones to install Git"
+echo " "
   successfully brew install git
 
-echo "Etch your name into the stones of Git"
-  read line"?Enter Your Full Name for Git: "
-  git config --global user.name $line
-  read line"?Enter Your Email Address for Git: "
-  git config --global user.email $line
+#
+# Git Setup
+#
+echo " "
+echo " Typhon demands to know if you have already setup Git user credentials! (y or n) > \c"
+read git_setup_already
+if [ "$git_setup_already" == "n" ]
+then
+  echo "Enter Your Full Name for Git > \c"
+  read $git_name
+  git config --global user.name $git_name
+  echo "Enter Your Email Address for Git > \c"
+  read $git_email
+  git config --global user.email $git_email
+else
+  echo " "
+  echo "  Oh, look who is fancy now!?"
+  echo " "
 
-echo "Installing Oh-My-Zshell, which is just an awesome shell"
+#
+# Zsh
+#
+echo "  Typhon loves Oh-My-Zsh!"
   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
-echo "Checking for SSH key, generating one if it doesn't exist ..."
+echo "  Time to enter SSH key into Github, if this is not done yet. Will open your Github account."
   [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
-
-echo "Copying public key to clipboard. Paste it into your Github account ..."
   [[ -f ~/.ssh/id_rsa.pub ]] && cat ~/.ssh/id_rsa.pub | pbcopy
-  successfully open https://github.com/account/ssh
+  open https://github.com/account/ssh
 
 echo "Installing MySql"
   successfully brew install mysql
@@ -55,24 +111,24 @@ echo "Installing Postgres, a good open source relational database ..."
 echo "Installing ack, a good way to search through files ..."
   successfully brew install ack
 
-echo "Installing tmux, a good way to save project state and switch between projects ..."
-  successfully brew install tmux
-
-echo "Installing reattach-to-user-namespace, for copy-paste and RubyMotion compatibility with tmux ..."
-  successfully brew install reattach-to-user-namespace
-
+#
+# RVM
+#
 echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the default ..."
   successfully curl -L https://get.rvm.io | bash -s stable --ruby
   successfully echo "
 # RVM
   [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
-  successfully source ~/.zshenv
+  source ~/.zshenv
 
+#
+# Rubygems Update
+#
 echo "Updating Rubygems"
   successfully gem update
 
 echo "Installing critical Ruby gems for Rails development ..."
-  successfully gem install bundler rails heroku pg foreman thin --no-rdoc --no-ri
+  successfully gem install bundler rails heroku pg foreman thin --no-rdoc --no-ri --quiet
 
 echo "Installing Redis, a fast, in-memory object store"
   successfully brew install redis
