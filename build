@@ -43,6 +43,7 @@ else
   echo "  Typhon demands puny human to use Alfred for assisting productivity"
   curl http://cachefly.alfredapp.com/alfred_1.3.1_261.dmg -o "alfred_1.3.1_261.dmg"
   successfully hdiutil attach alfred_1.3.1_261.dmg
+fi
 echo " "
 
 echo " "
@@ -52,6 +53,7 @@ then
 else
   echo "  Begin installing MacVim now!!!!"
   brew install macvim
+fi
 echo " "
 
 #
@@ -87,6 +89,7 @@ else
   echo " "
   echo "  Oh, look who is fancy now!?"
   echo " "
+fi
 
 #
 # Zsh
