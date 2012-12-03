@@ -1,7 +1,7 @@
-Typhon
-======
+Kreacher
+========
 
-[Typhon](http://en.wikipedia.org/wiki/Typhon), is a script to set up a Mac OS X laptop for Wistia development.
+[Kreacher](http://harrypotter.wikia.com/wiki/Kreacher), is a script to set up a Mac OS X laptop for Wistia development.
 
 Much of what follows is based on [Laptop](https://github.com/thoughtbot/laptop), a similar installer devised by the awesome folks at [Thoughtbot](http://thoughtbot.com/).
 
@@ -13,21 +13,21 @@ First Steps
 2) While that is installing, [download iTerm2](http://iterm2.com).
 
 3) Because it takes [FOREVER](http://www.youtube.com/watch?v=H-Q7b-vHY3Q) to download Xcode, you might as well also [create a GitHub account](https://github.com/). 
-(We will be installing Git during Typhon's reign)
+(We will order Kreacher to install Git for you)
 
 4) Open iTerm2, and Set zsh as your login shell. (After running command, close and re-open iTerm2)
 
     chsh -s /bin/zsh
 
-To Unleash Typhon
------------------
+To Order Kreacher to do your bidding
+------------------------------------
 
 Run the script:
 
     zsh < <(curl -s https://raw.github.com/jeffvincent/typhon/master/build)
 
-What Typhon forces the workers to build
----------------------------------------
+What Kreacher will retrieve for you
+-----------------------------------
 
 * Ack for finding things in files
 * Bundler gem for managing Ruby libraries
