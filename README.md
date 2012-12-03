@@ -24,7 +24,7 @@ To Order Kreacher to do your bidding
 
 Run the script:
 
-    zsh < <(curl -s https://raw.github.com/jeffvincent/typhon/master/build)
+    zsh < <(curl -s https://raw.github.com/jeffvincent/kreacher/master/build)
 
 What Kreacher will retrieve for you
 -----------------------------------
