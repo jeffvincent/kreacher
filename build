@@ -9,24 +9,30 @@ successfully() {
   $* || (echo "failed" 1>&2 && exit 1)
 }
 
+#
+# Intro, of course
+#
+
 echo " "
-echo "  But when Zeus had driven the Titans from Olympus,"
-echo "  mother Earth bare her youngest child Typhoeus of the love of"
-echo "  Tartarus, by the aid of golden Aphrodite."
-echo "    —Hesiod, Theogony 820–822."
+echo "  A house-elf is a magical creature which is devoted and loyal to "
+echo "  the one designated as their master."
+echo "  They serve wizards and witches and must do everything their masters 
+        command unless they are freed."
+echo "  A house-elf can only be freed when their master presents them with clothes."
 echo " "
-echo " TYPHON "
+echo " "
+echo "  Fight! Fight for my master, the defender of the house-elves!"
+echo "  Fight the Dark Lord, in the name of brave Regulus!"
+echo "  Fight!"
+echo "    —Kreacher leading the house-elves during the Battle of Hogwarts."
+echo " "
 echo " "
 
-#
-# Permissions Fix
-#
-successfully sudo chown -R `whoami` /usr/local
 
 #
 # Homebrew
 #
-echo "Bring out the mead! Tap the kegs! Bring me Homebrew!"
+echo "`whoami`: Kreacher! Get me Homebrew, the best package installer for Mac OS X"
   successfully ruby <(curl -fsS https://raw.github.com/mxcl/homebrew/go)
   successfully brew update
   successfully echo "# recommended by brew doctor export PATH='/usr/local/bin:$PATH'" >> ~/.zshenv
@@ -38,9 +44,9 @@ echo "Bring out the mead! Tap the kegs! Bring me Homebrew!"
 echo " "
 if test -d /Applications/Alfred.app -o -d ~/Applications/Alfred.app
 then 
-  echo "  Found Alfred...good taste!"
+  echo "  Kreacher applauds Master `whoami`'s taste"
 else
-  echo "  Typhon demands puny human to use Alfred for assisting productivity"
+  echo "  Kreacher has gone away and found Alfred for Master"
   curl http://cachefly.alfredapp.com/alfred_1.3.1_261.dmg -o "alfred_1.3.1_261.dmg"
   successfully hdiutil attach alfred_1.3.1_261.dmg
 fi
@@ -49,9 +55,9 @@ echo " "
 echo " "
 if test -d /Applications/MacVim.app -o -d ~/Applications/MacVim.app
 then 
-  echo "  Found MacVim...good...very good"
+  echo "  Kreacher has found MacVim...good...very good!"
 else
-  echo "  Begin installing MacVim now!!!!"
+  echo "  Kreacher: Begin installing MacVim now!!!!"
   brew install macvim
 fi
 echo " "
@@ -59,15 +65,14 @@ echo " "
 #
 # GCC Issues Fixes
 #
-echo "Installing GNU Compiler Collection and dependencies ..."
+echo "  Installing GNU Compiler Collection and dependencies ..."
   successfully brew tap homebrew/dupes
   successfully brew install autoconf automake apple-gcc42
 
 #
 # Git
 #
-echo "  Even malivalent tyrants like Typhon recognize the importance of version control."
-echo "  Bring the architects! Arrange great stones to install Git"
+echo "  Even cantankerous house-elves like Kreacher recognize the importance of version control."
 echo " "
   successfully brew install git
 
@@ -75,7 +80,7 @@ echo " "
 # Git Setup
 #
 echo " "
-echo " Typhon demands to know if you have already setup Git user credentials! (y or n) > \c"
+echo " Kreacher: Master `whoami`, do you already have Git credentials set up? (y or n) > \c"
 read git_setup_already
 if [ "$git_setup_already" == "n" ]
 then
@@ -94,30 +99,37 @@ fi
 #
 # Zsh
 #
-echo "  Typhon loves Oh-My-Zsh!"
+echo "  Kreacher has brought you Oh-My-Zsh!"
   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
 echo "  Time to enter SSH key into Github, if this is not done yet. Will open your Github account."
-  [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
-  [[ -f ~/.ssh/id_rsa.pub ]] && cat ~/.ssh/id_rsa.pub | pbcopy
-  open https://github.com/account/ssh
+  if [ -e ~/.ssh/id_rsa.pub ]
+    [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
+    [[ -f ~/.ssh/id_rsa.pub ]] && cat ~/.ssh/id_rsa.pub | pbcopy
+    open https://github.com/account/ssh
+  else
+    ssh-keygen -t rsa -C $git_email
+    [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
+    [[ -f ~/.ssh/id_rsa.pub ]] && cat ~/.ssh/id_rsa.pub | pbcopy
+    open https://github.com/account/ssh
+  fi
 
-echo "Installing MySql"
+echo "  Installing MySql"
   successfully brew install mysql
   unset TMPDIR
   mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
-echo "Installing Postgres, a good open source relational database ..."
+echo "  Installing Postgres, a good open source relational database ..."
   successfully brew link ossp-uuid
   successfully brew install postgres --no-python
 
-echo "Installing ack, a good way to search through files ..."
+echo "  Installing ack, a good way to search through files ..."
   successfully brew install ack
 
 #
 # RVM
 #
-echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the default ..."
+echo "  Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the default ..."
   successfully curl -L https://get.rvm.io | bash -s stable --ruby
   successfully echo "
 # RVM
@@ -127,16 +139,16 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3, which becomes the de
 #
 # Rubygems Update
 #
-echo "Updating Rubygems"
+echo "  Updating Rubygems"
   successfully gem update
 
-echo "Installing critical Ruby gems for Rails development ..."
+echo "  Installing critical Ruby gems for Rails development ..."
   successfully gem install bundler rails heroku pg foreman thin --no-rdoc --no-ri --quiet
 
-echo "Installing Redis, a fast, in-memory object store"
+echo "  Installing Redis, a fast, in-memory object store"
   successfully brew install redis
 
-echo "Installing Whim, Wistia Vim Plugins"
+echo "  Installing Whim, Wistia Vim Plugins"
   mv ~/.vimrc ~/.vimrc.backup && mv ~/.gvimrc ~/.gvimrc.backup
   mkdir -p ~/.vim/autoload ~/.vim/bundle
   successfully curl https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim \
@@ -151,4 +163,7 @@ echo "Installing Whim, Wistia Vim Plugins"
   ruby extconf.rb
   make
   rvm use default
-
+#
+# Permissions Fix
+#
+successfully sudo chown -R `whoami` /usr/local
