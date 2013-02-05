@@ -54,6 +54,7 @@ Other Notes
 -----------
 
 To run doomcrank, you will need to install Ruby 1.8.7 (pending update). Follow the instructions in [this post](http://stackoverflow.com/questions/11664835/mountain-lion-rvm-install-1-8-7-x11-error) for the fix.
+If you have any trouble with cacerts, try: https://github.com/mxcl/homebrew/issues/6103#issuecomment-1694558
 
 Credits
 -------
